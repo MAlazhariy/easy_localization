@@ -81,7 +81,7 @@ See [Easy Localization Loader](https://github.com/aissat/easy_localization_loade
 
 ### ⚠️ Note on **iOS**
 
-For translation to work on **iOS** you need to add supported locales to 
+For translation to work on **iOS** you need to add supported locales to
 `ios/Runner/Info.plist` as described [here](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#specifying-supportedlocales).
 
 Example:
@@ -89,8 +89,8 @@ Example:
 ```xml
 <key>CFBundleLocalizations</key>
 <array>
-	<string>en</string>
-	<string>nb</string>
+<string>en</string>
+<string>nb</string>
 </array>
 ```
 
@@ -106,13 +106,13 @@ import 'package:easy_localization/easy_localization.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  
+
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
-      path: 'assets/translations', // <-- change the path of the translation files 
-      fallbackLocale: Locale('en', 'US'),
-      child: MyApp()
+        supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
+        path: 'assets/translations', // <-- change the path of the translation files 
+        fallbackLocale: Locale('en', 'US'),
+        child: MyApp()
     ),
   );
 }
@@ -121,10 +121,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home: MyHomePage()
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        home: MyHomePage()
     );
   }
 }
@@ -317,6 +317,28 @@ var money = plural('money_named_args', 10.23, namedArgs: {'name': 'Jane', 'money
 var money = plural('money_named_args', 10.23, namedArgs: {'name': 'Jane'}, name: 'money')  // output: Jane has 10.23 dollars
 ```
 
+
+### ⚙️ Configuring Plural Rules with `ignorePluralRules`
+
+In some languages, pluralization is simple and only involves using zero, one, two, and other forms, without needing to handle the `few` or `many` categories.  
+By default, `easy_localization` ignores the `few` and `many` plural forms and uses just the zero, one, two, and other forms.
+
+If you want to enable the handling of the `few` and `many` plural categories for specific languages, you can configure the `ignorePluralRules` flag to `false` in the `EasyLocalization` initialization.
+
+Here’s how to configure it:
+
+```dart
+EasyLocalization(
+  ignorePluralRules: false, // Set this line to false to enable 'few' and 'many' plural categories
+  supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
+  path: 'assets/translations',
+  fallbackLocale: Locale('en', 'US'),
+  child: MyApp()
+)
+```
+
+Setting `ignorePluralRules: false` will enable the `few` and `many` plural categories, allowing your translations to handle all plural forms, including `few` and `many`, for supported languages.
+
 ### 🔥 Linked translations:
 
 If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
@@ -392,10 +414,10 @@ Example:
 
 ```dart
 RaisedButton(
-  onPressed: (){
-    context.resetLocale();
-  },
-  child: Text(LocaleKeys.reset_locale).tr(),
+onPressed: (){
+context.resetLocale();
+},
+child: Text(LocaleKeys.reset_locale).tr(),
 )
 ```
 
@@ -417,10 +439,10 @@ Example:
 
 ```dart
 RaisedButton(
-  onPressed: (){
-    context.deleteSaveLocale();
-  },
-  child: Text(LocaleKeys.reset_locale).tr(),
+onPressed: (){
+context.deleteSaveLocale();
+},
+child: Text(LocaleKeys.reset_locale).tr(),
 )
 ```
 
@@ -464,18 +486,18 @@ Steps:
 
   ```dart
   import 'generated/codegen_loader.g.dart';
-  ...
-  void main(){
-    runApp(EasyLocalization(
+...
+void main(){
+  runApp(EasyLocalization(
       child: MyApp(),
       supportedLocales: [Locale('en', 'US'), Locale('ar', 'DZ')],
       path: 'resources/langs',
       assetLoader: CodegenLoader()
-    ));
-  }
-  ...
+  ));
+}
+...
   ```
-  
+
 4. All done!
 
 ### 📦 Localization support for multi module/package project
@@ -484,17 +506,17 @@ If you want to add localization support from other modules and packages you can 
 
 ```dart
   void main(){
-    runApp(EasyLocalization(
+  runApp(EasyLocalization(
       child: MyApp(),
       supportedLocales: [Locale('en', 'US'), Locale('ar', 'DZ')],
       path: 'resources/langs',
       assetLoader: CodegenLoader()
       extraAssetLoaders: [
-        TranslationsLoader(packageName: 'package_example_1'),
-        TranslationsLoader(packageName: 'package_example_2'),
-      ],
-    ));
-  }
+      TranslationsLoader(packageName: 'package_example_1'),
+    TranslationsLoader(packageName: 'package_example_2'),
+    ],
+  ));
+}
 ```
 
 ### 🔑 Localization keys
@@ -502,7 +524,7 @@ If you want to add localization support from other modules and packages you can 
 If you have many localization keys and are confused, key generation will help you. The code editor will automatically prompt keys
 
 Steps:
-1. Open your terminal in the folder's path containing your project 
+1. Open your terminal in the folder's path containing your project
 2. Run in terminal `flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart`
 3. Past import.
 
@@ -547,11 +569,11 @@ For catching logger messages you need override default printer function.
 
 ```dart
 EasyLogPrinter customLogPrinter = (
-  Object object, {
-  String name,
-  StackTrace stackTrace,
-  LevelMessages level,
-}) {
+    Object object, {
+      String name,
+      StackTrace stackTrace,
+      LevelMessages level,
+    }) {
   ///Your function
   print('$name: ${object.toString()}');
 };
