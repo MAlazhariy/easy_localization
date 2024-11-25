@@ -192,7 +192,7 @@ void main() {
     });
     test('Arabic all cases (with ignorePluralRules) | using `_pluralCaseFallback`', () async {
       Localization.load(
-        const Locale('en'),
+        const Locale('ar'),
         translations: r.translations,
         fallbackTranslations: r.fallbackTranslations,
         ignorePluralRules: true,
