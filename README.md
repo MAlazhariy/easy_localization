@@ -89,8 +89,8 @@ Example:
 ```xml
 <key>CFBundleLocalizations</key>
 <array>
-<string>en</string>
-<string>nb</string>
+	<string>en</string>
+	<string>nb</string>
 </array>
 ```
 
@@ -106,13 +106,13 @@ import 'package:easy_localization/easy_localization.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
+  
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
-        path: 'assets/translations', // <-- change the path of the translation files 
-        fallbackLocale: Locale('en', 'US'),
-        child: MyApp()
+      supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
+      path: 'assets/translations', // <-- change the path of the translation files 
+      fallbackLocale: Locale('en', 'US'),
+      child: MyApp()
     ),
   );
 }
@@ -121,10 +121,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        home: MyHomePage()
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      home: MyHomePage()
     );
   }
 }
@@ -414,10 +414,10 @@ Example:
 
 ```dart
 RaisedButton(
-onPressed: (){
-context.resetLocale();
-},
-child: Text(LocaleKeys.reset_locale).tr(),
+  onPressed: (){
+    context.resetLocale();
+  },
+  child: Text(LocaleKeys.reset_locale).tr(),
 )
 ```
 
@@ -439,10 +439,10 @@ Example:
 
 ```dart
 RaisedButton(
-onPressed: (){
-context.deleteSaveLocale();
-},
-child: Text(LocaleKeys.reset_locale).tr(),
+  onPressed: (){
+    context.deleteSaveLocale();
+  },
+  child: Text(LocaleKeys.reset_locale).tr(),
 )
 ```
 
@@ -486,16 +486,16 @@ Steps:
 
   ```dart
   import 'generated/codegen_loader.g.dart';
-...
-void main(){
-  runApp(EasyLocalization(
+  ...
+  void main(){
+    runApp(EasyLocalization(
       child: MyApp(),
       supportedLocales: [Locale('en', 'US'), Locale('ar', 'DZ')],
       path: 'resources/langs',
       assetLoader: CodegenLoader()
-  ));
-}
-...
+    ));
+  }
+  ...
   ```
 
 4. All done!
@@ -506,17 +506,17 @@ If you want to add localization support from other modules and packages you can 
 
 ```dart
   void main(){
-  runApp(EasyLocalization(
+    runApp(EasyLocalization(
       child: MyApp(),
       supportedLocales: [Locale('en', 'US'), Locale('ar', 'DZ')],
       path: 'resources/langs',
       assetLoader: CodegenLoader()
       extraAssetLoaders: [
-      TranslationsLoader(packageName: 'package_example_1'),
-    TranslationsLoader(packageName: 'package_example_2'),
-    ],
-  ));
-}
+        TranslationsLoader(packageName: 'package_example_1'),
+        TranslationsLoader(packageName: 'package_example_2'),
+      ],
+    ));
+  }
 ```
 
 ### 🔑 Localization keys
